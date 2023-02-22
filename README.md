@@ -1,5 +1,14 @@
 # ✏️Ed3Academy 之 Solidity 入门开发课程 👷
 
+这是 Ed3Academy 系列课程中知识点实战演示代码。
+
+通过这份文档，您将学会：
+
+- 部署自己的 ERC20 通证；
+- 上传资源到 IPFS；
+- 创建自己的 NFT；
+- 使用 ERC20 通证铸造出 NFT
+
 ## 🚧 在 Polygon Mumbai 网络上部署 MTK
 
 💚 测试命令：
