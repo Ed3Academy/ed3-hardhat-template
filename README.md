@@ -9,6 +9,12 @@
 - 创建自己的 NFT；
 - 使用 ERC20 通证铸造出 NFT
 
+您需要复制.env.example 并改名为.env，填充.env 中账号信息，然后安装项目依赖
+
+```
+npm install
+```
+
 ## 🚧 在 Polygon Mumbai 网络上部署 MTK
 
 💚 测试命令：
