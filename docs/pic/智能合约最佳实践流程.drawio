@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-03-06T07:07:51.530Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" etag="YyviSUW7XYHzLBKxDJpa" version="21.0.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-06T07:09:11.872Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" etag="Vo_j8R5nZCe_u8eLxqAC" version="21.0.2" type="github">
   <diagram name="Page-1" id="b7a7eaba-c6c5-6fbe-34ae-1d3a4219ac39">
     <mxGraphModel dx="1687" dy="-194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
       <root>
@@ -314,6 +314,15 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="188" y="138" as="targetPoint" />
             <mxPoint x="232" y="139" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WZ0_wP23tdpRTDeZLd8Q-34" value="Tally&#xa;Discord&#xa;Twitter&#xa;Snapshot&#xa;..." style="shape=note;size=15;spacingLeft=5;overflow=fill;whiteSpace=wrap;fontSize=14;verticalAlign=middle;spacing=0;fillColor=#f5f5f5;strokeColor=#666666;gradientColor=#b3b3b3;" vertex="1" parent="zn8mdTFGLDnj49y2dZR2-181">
+          <mxGeometry x="219.39" y="252.63" width="167.61" height="92.37" as="geometry" />
+        </mxCell>
+        <mxCell id="WZ0_wP23tdpRTDeZLd8Q-35" value="" style="rounded=0;endArrow=none;dashed=1;html=1;fontSize=14;" edge="1" parent="zn8mdTFGLDnj49y2dZR2-181" source="WZ0_wP23tdpRTDeZLd8Q-34" target="WZ0_wP23tdpRTDeZLd8Q-30">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="188" y="239" as="targetPoint" />
+            <mxPoint x="227" y="239" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="zn8mdTFGLDnj49y2dZR2-214" value="" style="group" parent="1" vertex="1" connectable="0">
