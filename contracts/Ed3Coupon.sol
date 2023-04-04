@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract PayableNFT is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable, ERC721Burnable {
+contract Ed3Coupon is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable, ERC721Burnable {
     using Counters for Counters.Counter;
     using Strings for uint256;
 

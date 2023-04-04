@@ -9,29 +9,6 @@ const { developmentChains } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
 
 async function main() {
-  // const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  // const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  // const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
-
-  // const lockedAmount = hre.ethers.utils.parseEther("1");
-
-  // const Lock = await hre.ethers.getContractFactory("Lock");
-  // const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  // await lock.deployed();
-
-  // console.log(
-  //   `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  // );
-
-  // 使用加密文件来加载钱包
-  // const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf8");
-  // let wallet = new ethers.Wallet.fromEncryptedJsonSync(
-  //   encryptedJson,
-  //   process.env.PRIVATE_KEY_PASSWORD
-  // );
-  // wallet = wallet.connect(provider);
-
   let mintPrice = ethers.utils.parseEther("0.001");
 
   let mintTokenNumber = ethers.constants.WeiPerEther.mul(ethers.BigNumber.from(100));
