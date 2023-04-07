@@ -2,9 +2,7 @@ const { NFTStorage, File } = require("nft.storage");
 const fs = require("fs-extra");
 const path = require("path");
 const dotenv = require("dotenv");
-
 dotenv.config();
-
 const apiKey = process.env.NFT_STORAGE_API_KEY;
 
 if (!apiKey) {
@@ -17,13 +15,15 @@ function readDirectory(dir) {
   const names = fs.readdirSync(dir);
   return names.map((name) => new File([fs.readFileSync(path.join(dir, name))], name));
 }
-
+// npx hardhat run ./scripts/upload-nfts.js
 async function main() {
-  const images = readDirectory(path.join(__dirname, "../nfts/images"));
+  // 在这里切换想要上传的NFT图片
+  const pathName = "ticket";
+  // const pathName = "coupon";
+  const images = readDirectory(path.join(__dirname, "../nfts/images/" + pathName));
   const imageMetadata = await client.storeDirectory(images);
   console.log("Images uploaded to: ", imageMetadata);
-
-  const nftFiles = readDirectory(path.join(__dirname, "../nfts/metadata"));
+  const nftFiles = readDirectory(path.join(__dirname, "../nfts/metadata/" + pathName));
   const nftFilesModified = await Promise.all(
     nftFiles.map(async (file) => {
       const obj = JSON.parse(await file.text());
@@ -33,9 +33,9 @@ async function main() {
     }),
   );
   const fileMetadata = await client.storeDirectory(nftFilesModified);
-  console.log("Metadata uploaded to: ", fileMetadata);
+  console.log("Metadata uploaded to: https://ipfs.io/ipfs/", fileMetadata);
 
-  const locationPath = path.join(__dirname, "../nfts/location.json");
+  const locationPath = path.join(__dirname, "../nfts/location/" + pathName + "/location.json");
   fs.writeFileSync(
     locationPath,
     JSON.stringify(

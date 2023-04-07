@@ -1,5 +1,7 @@
 {
   "chainId": 80001,
   "url": "https://rpc-mumbai.maticvigil.com",
-  "PayableNFT": "0x3D8745d7F808Cd760b5bb58F184F565143C5e891"
+  "ed3AirlineGate": "0x0e7d6B2Eef4caD5D8b8EaE98236881FBefEb240D",
+  "ed3LoyaltyPoints": "0x3116CE5e7d57F27D76e383b89450bB55932bEBAE",
+  "ed3Coupon": "0x57fF8A0c34E7A08bF91CC0811e359a92888467fA"
 }
