@@ -10,7 +10,10 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract PayableNFT is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable, ERC721Burnable {
+/**
+ * @title Ed3航空公司优惠券NFT
+ */
+contract Ed3Coupon is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable, ERC721Burnable {
     using Counters for Counters.Counter;
     using Strings for uint256;
 
@@ -77,8 +80,6 @@ contract PayableNFT is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage, ERC7
         require(ERC20(tokenAddress).balanceOf(msg.sender) >= mintPrice, "Insufficient funds");
         ERC20(tokenAddress).transferFrom(msg.sender, address(this), mintPrice);
 
-        // We cannot just use balanceOf to create the new tokenId because tokens
-        // can be burned (destroyed), so we need a separate counter.
         uint256 tokenId = tokenIdCounter.current();
         _mint(_to, tokenId);
         tokenIdCounter.increment();
