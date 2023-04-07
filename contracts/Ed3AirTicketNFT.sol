@@ -10,6 +10,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
+/**
+ * @title Ed3航空公司机票NFT
+ */
 contract Ed3AirTicketNFT is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable, ERC721Burnable {
     using Counters for Counters.Counter;
     using Strings for uint256;
@@ -25,6 +28,16 @@ contract Ed3AirTicketNFT is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage,
     uint256 public launchDate;
     address payable paymentAddress;
 
+    /**
+     * @notice Ed3航空公司机票NFT构造函数
+     * @param _name 机票名称
+     * @param _symbol 机票symbol
+     * @param _baseUri 机票元数据地址
+     * @param _mintPrice 机票单价
+     * @param _maxSupply 机票发行数量
+     * @param _launchDate 机票发行开始实践
+     * @param _paymentAddress 机票
+     */
     constructor(
         string memory _name,
         string memory _symbol,
