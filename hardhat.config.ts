@@ -10,12 +10,6 @@ import "./tasks/deploy";
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
 
-// Ensure that we have all the environment variables we need.
-const mnemonic: string | undefined = process.env.MNEMONIC;
-if (!mnemonic) {
-  throw new Error("Please set your MNEMONIC in a .env file");
-}
-
 const infuraApiKey: string | undefined = process.env.INFURA_API_KEY;
 if (!infuraApiKey) {
   throw new Error("Please set your INFURA_API_KEY in a .env file");
@@ -48,7 +42,6 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
   return {
     accounts: {
       count: 10,
-      mnemonic,
       path: "m/44'/60'/0'/0",
     },
     chainId: chainIds[chain],
@@ -78,9 +71,7 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
-      accounts: {
-        mnemonic,
-      },
+      accounts: {},
       chainId: chainIds.hardhat,
     },
     arbitrum: getChainConfig("arbitrum-mainnet"),
