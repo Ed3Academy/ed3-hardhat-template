@@ -1,4 +1,4 @@
-# ✏️Ed3Academy 之 Solidity 入门开发课程案例--客户忠诚度计划 👷
+# ✏️Ed3Academy 之 Solidity 入门开发课程案例--Ed3 Miles&More 计划 👷
 
 # **🚧 课题目标**
 
@@ -42,7 +42,7 @@
 
 ## **⚡ 客户忠诚度计划 Web3 解决方案**
 
-**Web3 技\*\***术可以解决客户忠诚度计划中的以下几个问题：\*\*
+Web3 技术可以解决客户忠诚度计划中的以下几个问题：
 
 - **创新多样的奖励方式**
 
@@ -77,10 +77,10 @@ Lufthansa Miles & More 是德国汉莎航空旗下的忠诚度计划，旨在为
 案例流程：
 
 1. 用户 User 通过 Ed3AirlineGate 服务窗口购买机票；
-2. Ed3AirlineGate 服务窗口将积分发放给 User；
+2. Ed3AirlineGate 服务窗口将机票和积分发放给 User；
 3. User 使用积分兑换 Coupon 优惠券；
 
-其中第一步中，V1 版本用一个 mapping 记录用户的机票数；V2 版本用户将实际购买机票 NFT（ERC721）。
+其中第一步中，V0 版本用一个 mapping 记录用户的机票数；正式版本用户将实际购买机票 NFT（ERC721）。
 
 您需要复制.env.example 并改名为.env，填充.env 中账号信息，然后安装项目依赖
 
@@ -88,7 +88,21 @@ Lufthansa Miles & More 是德国汉莎航空旗下的忠诚度计划，旨在为
 npm install
 ```
 
-## V1 版本
+## V0 版本
+
+测试命令
+
+```shell
+npx hardhat test ./test/testDeployLoyaltyProgramV0.js
+```
+
+部署命令
+
+```shell
+npx hardhat run ./scripts/deployLoyaltyProgramV0.js --network PolygonMumbai
+```
+
+## 正式版本
 
 测试命令
 
@@ -100,18 +114,4 @@ npx hardhat test ./test/testDeployLoyaltyProgram.js
 
 ```shell
 npx hardhat run ./scripts/deployLoyaltyProgram.js --network PolygonMumbai
-```
-
-## V2 版本
-
-测试命令
-
-```shell
-npx hardhat test ./test/testDeployLoyaltyProgramV2.js
-```
-
-部署命令
-
-```shell
-npx hardhat run ./scripts/deployLoyaltyProgramV2.js --network PolygonMumbai
 ```
