@@ -65,22 +65,17 @@ Lufthansa Miles & More 是德国汉莎航空旗下的忠诚度计划，旨在为
 。Miles & More 发行了代币，称为 Lufthansa 代币，可以在 Miles & More 计划内兑换奖励。持有 Lufthansa 代币的会员可以使用它
 们来兑换机票、升舱、酒店住宿、租车等，还可以在 Miles & More 商城中购买商品。
 
-本次课题实践是做一版简化的 Lufthansa Token，主要涉及到的流程：
-
-1. 用户使用原生币购买机票，可以看到机票数+1，同时获取 1 个 Lufthansa Token。
-2. 用户可以使用 10 个积分兑换 1 张机票（数字权益 NFT）。
-
-# 🎉 实践过程
+本次课题实践是做一版简化的 Ed3 Miles & More，案例流程：
 
 ![1677049582677](image/README/simple_view.png)
 
-案例流程：
+1. 用户 User 通过 Ed3AirlineGate 服务窗口购买机票 Ed3AirTicketNFT；
+2. Ed3AirlineGate 服务窗口将机票 Ed3AirTicketNFT 和积分 Ed3LoyaltyPoints 发放给 User；
+3. User 使用 Ed3LoyaltyPoints 积分兑换 Ed3Coupon 优惠券；
 
-1. 用户 User 通过 Ed3AirlineGate 服务窗口购买机票；
-2. Ed3AirlineGate 服务窗口将机票和积分发放给 User；
-3. User 使用积分兑换 Coupon 优惠券；
+# 🎉 实践过程
 
-其中第一步中，V0 版本用一个 mapping 记录用户的机票数；正式版本用户将实际购买机票 NFT（ERC721）。
+其中，V0 版本用一个 mapping 记录用户的机票数；正式版本用户将实际购买机票 NFT（ERC721）
 
 您需要复制.env.example 并改名为.env，填充.env 中账号信息，然后安装项目依赖
 
