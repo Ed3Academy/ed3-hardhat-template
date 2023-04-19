@@ -6,7 +6,7 @@ const moment = require("moment");
 const NFTLocation = require("../nfts/location/ticket/location.json");
 const NFTName = "Ed3AirTicket";
 const NFTSymbol = "Ed3AirTicket";
-const count = 1000;
+const count = 100000;
 const mintPrice = 10 ** 14;
 
 async function main() {
