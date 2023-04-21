@@ -4,7 +4,7 @@ pragma solidity ^0.8.9;
 import "./IEd3LoyaltyPoints.sol";
 import "./IEd3AirTicketNFT.sol";
 
-/// @title Ed3航空公司服务窗口，用于用于购买机票并发放积分，同时提供接口让管理员可以转移购买机票的资金。
+// @title Ed3航空公司服务窗口，用于用于购买机票并发放积分，同时提供接口让管理员可以转移购买机票的资金。
 contract Ed3AirlineGate {
     address payable public ed3TicketNFTAddress;
     address public ed3LoyaltyPointsAddress;

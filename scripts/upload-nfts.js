@@ -17,10 +17,11 @@ function readDirectory(dir) {
 }
 // npx hardhat run ./scripts/upload-nfts.js
 async function main() {
-  // 在这里切换想要上传的NFT图片
+  // ticket和coupon都是使用相同的上传脚本，我们在这里切换想要上传的NFT图片是ticket还是coupon
   const pathName = "ticket";
   // const pathName = "coupon";
   const images = readDirectory(path.join(__dirname, "../nfts/images/" + pathName));
+  // 将图片上传到ipfs上
   const imageMetadata = await client.storeDirectory(images);
   console.log("Images uploaded to: ", imageMetadata);
   const nftFiles = readDirectory(path.join(__dirname, "../nfts/metadata/" + pathName));
@@ -32,9 +33,10 @@ async function main() {
       return new File([JSON.stringify(obj)], file.name);
     }),
   );
+  // 将元数据上传到ipfs上
   const fileMetadata = await client.storeDirectory(nftFilesModified);
   console.log("Metadata uploaded to: https://ipfs.io/ipfs/", fileMetadata);
-
+  // 将元数据保存到本地
   const locationPath = path.join(__dirname, "../nfts/location/" + pathName + "/location.json");
   fs.writeFileSync(
     locationPath,

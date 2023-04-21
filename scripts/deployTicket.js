@@ -1,11 +1,13 @@
 // npx hardhat run ./scripts/deployTicket.js  --network PolygonMumbai
-const hre = require("hardhat");
-const { ethers, upgrades } = require("hardhat");
+const { ethers } = require("hardhat");
 const moment = require("moment");
-// 在这里修改元数据地址
+// 在这里获取元数据地址
 const NFTLocation = require("../nfts/location/ticket/location.json");
+// 设置机票名称
 const NFTName = "Ed3AirTicket";
+// 设置机票标识符
 const NFTSymbol = "Ed3AirTicket";
+// 设置机票发行上限 10w张
 const count = 100000;
 const mintPrice = 10 ** 14;
 

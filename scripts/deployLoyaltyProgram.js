@@ -32,7 +32,7 @@ async function main() {
     `npx hardhat verify --network PolygonMumbai "${ed3LoyaltyPoints.address}" ${pointName} ${pointSymbol} ${pointTotalSupply}`,
   );
 
-  // 部署服务窗口 GateV2
+  // 部署服务窗口 Gate
   const pointsPerTicket = 1000;
   const Ed3AirlineGate = await ethers.getContractFactory("Ed3AirlineGate");
   const ed3AirlineGate = await Ed3AirlineGate.deploy(ed3LoyaltyPoints.address, ed3AirTicketNFT, pointsPerTicket);
