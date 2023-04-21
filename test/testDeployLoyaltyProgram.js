@@ -1,7 +1,5 @@
-const { time, loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
-const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
+const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 const { expect } = require("chai");
-const hre = require("hardhat");
 const { ethers } = require("hardhat");
 const moment = require("moment");
 const ticketNFTLocation = require("../nfts/location/ticket/location.json");
@@ -9,9 +7,6 @@ const couponNFTLocation = require("../nfts/location/coupon/location.json");
 
 // npx hardhat test ./test/testDeployLoyaltyProgram.js
 describe("Ed3Coupon mint test", function () {
-  // We define a fixture to reuse the same setup in every test.
-  // We use loadFixture to run this setup once, snapshot that state,
-  // and reset Hardhat Network to that snapshot in every test.
   async function deployFixture() {
     const [owner] = await ethers.getSigners();
 
@@ -22,8 +17,11 @@ describe("Ed3Coupon mint test", function () {
     const [deployer] = await ethers.getSigners();
     const ticketMetadata = ticketNFTLocation.metadata;
     const ticketCount = ticketNFTLocation.count;
+    // 获取合约对象
     const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
+    // 设置ERC721开始发售时间
     const ticketLaunchDate = moment("2023-03-12 00:00");
+    // 部署合约
     const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
       ticketNFTName,
       ticketNFTSymbol,
@@ -39,7 +37,7 @@ describe("Ed3Coupon mint test", function () {
     const Ed3LoyaltyPoints = await ethers.getContractFactory("Ed3LoyaltyPoints");
     const ed3LoyaltyPoints = await Ed3LoyaltyPoints.deploy("Ed3LoyaltyPoints", "ELP", pointTotalSupply);
 
-    // 部署服务窗口 GateV2
+    // 部署服务窗口 Gate
     const pointsPerTicket = 1000;
     const Ed3AirlineGate = await ethers.getContractFactory("Ed3AirlineGate");
     const ed3AirlineGate = await Ed3AirlineGate.deploy(
@@ -97,28 +95,22 @@ describe("Ed3Coupon mint test", function () {
   describe("Mint", function () {
     describe("exchange coupon", function () {
       it("Should mint the NFT to mint account", async function () {
-        const {
-          ticketMintPrice,
-          ticketCount,
-          ed3AirTicketNFT,
-          ed3AirlineGate,
-          ed3LoyaltyPoints,
-          pointTotalSupply,
-          pointsPerTicket,
-          ed3Coupon,
-          owner,
-        } = await loadFixture(deployFixture);
-        // console.log(await myToken.connect(owner).estimateGas.mint(owner.address,{ value: ticketMintPrice }));
+        const { ticketMintPrice, ed3AirTicketNFT, ed3AirlineGate, ed3LoyaltyPoints, ed3Coupon, owner } =
+          await loadFixture(deployFixture);
+        // 用户携带ticketMintPrice资金通过服务窗口购买机票
         await ed3AirlineGate.connect(owner).mint(owner.address, { value: ticketMintPrice });
         const ed3AirlineTicketBalance = await ed3AirTicketNFT.balanceOf(owner.address);
         const ed3LoyaltyPointsBalance = await ed3LoyaltyPoints.balanceOf(owner.address);
         console.log("ed3AirlineGate ticket balance:", ed3AirlineTicketBalance);
         console.log("ed3LoyaltyPoints balance:", ed3LoyaltyPointsBalance);
         console.log("ed3LoyaltyPoints approve address:", ed3Coupon.address);
+        // 授权积分合约给优惠券合约，如此做才能让优惠券合约收走对应的积分完成兑换
         await ed3LoyaltyPoints.connect(owner).approve(ed3Coupon.address, 0);
         await ed3LoyaltyPoints.connect(owner).approve(ed3Coupon.address, ed3LoyaltyPointsBalance);
         console.log("ed3Coupon balance before:", await ed3Coupon.balanceOf(owner.address));
+        // 完成积分的兑换
         await ed3Coupon.connect(owner).mint(owner.address);
+        // 校验优惠券的数量为1
         expect(await ed3Coupon.balanceOf(owner.address)).to.equal(1);
         console.log("ed3Coupon token balance after:", await ed3Coupon.balanceOf(owner.address));
       });
