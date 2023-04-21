@@ -10,20 +10,35 @@ async function main() {
   const [owner] = await ethers.getSigners();
 
   // 部署机票
-  // const ticketNFTName = "Ed3AirTicket";
-  // const ticketNFTSymbol = "Ed3AirTicket";
-  // const ticketMintPrice = 10 ** 14;
-  // const [deployer] = await ethers.getSigners();
-  // const ticketMetadata = ticketNFTLocation.metadata;
-  // const ticketCount = ticketNFTLocation.count;
-  // const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
-  // const ticketLaunchDate = moment("2023-03-12 00:00");
-  // const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(ticketNFTName, ticketNFTSymbol, `ipfs://${ticketMetadata}/`, ticketMintPrice, ticketCount, Math.round(ticketLaunchDate.valueOf () / 1000), deployer.address);
-  // console.log( `npx hardhat verify --network PolygonMumbai "${ed3AirTicketNFT.address}" ${ticketNFTName} ${ticketNFTSymbol} ipfs://${ticketMetadata}/ ${ticketMintPrice} ${ticketCount} ${Math.round(ticketLaunchDate.valueOf() / 1000)} ${deployer.address}`);
-  const ed3AirTicketNFT = "0x8B939b4469BC384e841afE4d809D95F1373e81cF";
-
-  // 部署积分
-  const pointTotalSupply = 10000;
+  const ticketNFTName = "Ed3AirTicket";
+  const ticketNFTSymbol = "Ed3AirTicket";
+  const ticketMintPrice = 10 ** 14;
+  const [deployer] = await ethers.getSigners();
+  const ticketMetadata = ticketNFTLocation.metadata;
+  const ticketCount = 100000;
+  const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
+  const ticketLaunchDate = moment("2023-03-12 00:00");
+  const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
+    ticketNFTName,
+    ticketNFTSymbol,
+    `ipfs://${ticketMetadata}/`,
+    ticketMintPrice,
+    ticketCount,
+    Math.round(ticketLaunchDate.valueOf() / 1000),
+    deployer.address,
+  );
+  console.log(
+    `npx hardhat verify --network PolygonMumbai "${
+      ed3AirTicketNFT.address
+    }" ${ticketNFTName} ${ticketNFTSymbol} ipfs://${ticketMetadata}/ ${ticketMintPrice} ${ticketCount} ${Math.round(
+      ticketLaunchDate.valueOf() / 1000,
+    )} ${deployer.address}`,
+  );
+  const ed3AirTicketNFTAddress = ed3AirTicketNFT.address;
+  // 可以直接使用Ed3提供的机票合约
+  // const ed3AirTicketNFTAddress = "0x9637bA532DC66f2b09F4B8b46681640446A178C3";
+  // 部署积分，积分数量=机票数量*兑换比例
+  const pointTotalSupply = 10 ** 8;
   const pointName = "Ed3LoyaltyPoints";
   const pointSymbol = "ELP";
   const Ed3LoyaltyPoints = await ethers.getContractFactory("Ed3LoyaltyPoints");
@@ -35,10 +50,10 @@ async function main() {
   // 部署服务窗口 Gate
   const pointsPerTicket = 1000;
   const Ed3AirlineGate = await ethers.getContractFactory("Ed3AirlineGate");
-  const ed3AirlineGate = await Ed3AirlineGate.deploy(ed3LoyaltyPoints.address, ed3AirTicketNFT, pointsPerTicket);
+  const ed3AirlineGate = await Ed3AirlineGate.deploy(ed3LoyaltyPoints.address, ed3AirTicketNFTAddress, pointsPerTicket);
   await ed3LoyaltyPoints.transferOwnership(ed3AirlineGate.address);
   console.log(
-    `npx hardhat verify --network PolygonMumbai "${ed3AirlineGate.address}" ${ed3LoyaltyPoints.address} ${ed3AirTicketNFT} ${pointsPerTicket}`,
+    `npx hardhat verify --network PolygonMumbai "${ed3AirlineGate.address}" ${ed3LoyaltyPoints.address} ${ed3AirTicketNFTAddress} ${pointsPerTicket}`,
   );
 
   // 部署优惠券 Coupon
@@ -46,7 +61,7 @@ async function main() {
   const couponSymbol = "Ed3Coupon";
   const couponMetadata = couponNFTLocation.metadata;
   const couponMintPrice = 1000;
-  const couponCount = 1000;
+  const couponCount = 100000;
   const Ed3Coupon = await ethers.getContractFactory("Ed3Coupon");
   const couponLaunchDate = moment("2023-03-12 00:00");
   const ed3Coupon = await Ed3Coupon.deploy(
