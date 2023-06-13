@@ -19,7 +19,7 @@ describe("Ed3AirTicketNFT test", function () {
     // 部署优惠券 Coupon
     const couponName = "Ed3Coupon";
     const couponSymbol = "Ed3Coupon";
-    const couponMetadata = couponNFTLocation.metadata;
+    const couponMetadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/coupon.json`;
     const couponMintPrice = 1000;
     const maxSupply = 2;
     const Ed3Coupon = await ethers.getContractFactory("Ed3Coupon");
@@ -28,7 +28,7 @@ describe("Ed3AirTicketNFT test", function () {
       ed3LoyaltyPoints.address,
       couponName,
       couponSymbol,
-      `ipfs://${couponMetadata}/`,
+      couponMetadata,
       couponMintPrice,
       maxSupply,
       Math.round(couponLaunchDate.valueOf() / 1000),

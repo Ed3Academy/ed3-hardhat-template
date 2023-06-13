@@ -17,7 +17,7 @@ describe("Ed3AirlineGate test", function () {
     const ticketNFTSymbol = "Ed3AirTicket";
     const ticketMintPrice = 10 ** 14;
     const [deployer] = await ethers.getSigners();
-    const ticketMetadata = ticketNFTLocation.metadata;
+    const ticketMetadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/ticket.json`;
     const ticketCount = ticketNFTLocation.count;
     // 获取合约对象
     const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
@@ -27,7 +27,7 @@ describe("Ed3AirlineGate test", function () {
     const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
       ticketNFTName,
       ticketNFTSymbol,
-      `ipfs://${ticketMetadata}/`,
+      ticketMetadata,
       ticketMintPrice,
       ticketCount,
       Math.round(ticketLaunchDate.valueOf() / 1000),
@@ -52,7 +52,7 @@ describe("Ed3AirlineGate test", function () {
     // 部署优惠券 Coupon
     const couponName = "Ed3Coupon";
     const couponSymbol = "Ed3Coupon";
-    const couponMetadata = couponNFTLocation.metadata;
+    const couponMetadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/coupon.json`;
     const couponMintPrice = 1000;
     const couponCount = couponNFTLocation.count;
     const Ed3Coupon = await ethers.getContractFactory("Ed3Coupon");
@@ -61,7 +61,7 @@ describe("Ed3AirlineGate test", function () {
       ed3LoyaltyPoints.address,
       couponName,
       couponSymbol,
-      `ipfs://${couponMetadata}/`,
+      couponMetadata,
       couponMintPrice,
       couponCount,
       Math.round(couponLaunchDate.valueOf() / 1000),
