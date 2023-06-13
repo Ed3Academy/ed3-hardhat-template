@@ -12,13 +12,13 @@ async function main() {
   const mintPrice = 10 ** 14;
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account: " + deployer.address);
-  const { metadata } = NFTLocation;
+  const metadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/feature/make_up_omissions/nfts/metadata_fix/coupon.json`;
   const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
   const launchDate = moment("2023-03-12 00:00");
   const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
     ticketNFTName,
     ticketNFTSymbol,
-    `ipfs://${metadata}/`,
+    metadata,
     mintPrice,
     count,
     Math.round(launchDate.valueOf() / 1000),
@@ -27,7 +27,7 @@ async function main() {
   console.log(
     `npx hardhat verify --network PolygonMumbai "${
       ed3AirTicketNFT.address
-    }" ${ticketNFTName} ${ticketNFTSymbol} ipfs://${metadata}/ ${mintPrice} ${count} ${Math.round(
+    }" ${ticketNFTName} ${ticketNFTSymbol} ${metadata} ${mintPrice} ${count} ${Math.round(
       launchDate.valueOf() / 1000,
     )} ${deployer.address}`,
   );
