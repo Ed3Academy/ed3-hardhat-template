@@ -4,9 +4,11 @@ const { ethers } = require("hardhat");
 const moment = require("moment");
 const ticketNFTLocation = require("../nfts/location/ticket/location.json");
 const couponNFTLocation = require("../nfts/location/coupon/location.json");
-
-// npx hardhat test ./test/testDeployLoyaltyProgram.js
-describe("Ed3Coupon mint test", function () {
+// npx hardhat test ./test/testEd3AirlineGate.js
+describe("Ed3AirlineGate test", function () {
+  // We define a fixture to reuse the same setup in every test.
+  // We use loadFixture to run this setup once, snapshot that state,
+  // and reset Hardhat Network to that snapshot in every test.
   async function deployFixture() {
     const [owner] = await ethers.getSigners();
 
@@ -78,17 +80,16 @@ describe("Ed3Coupon mint test", function () {
       owner,
     };
   }
-
   describe("Deployment", function () {
-    it("Should set the right owner", async function () {
-      const { ed3Coupon, owner } = await loadFixture(deployFixture);
-      console.log("ed3Coupon.address", ed3Coupon.address);
-      expect(await ed3Coupon.owner()).to.equal(owner.address);
-    });
-
-    it("ed3Coupon should set the right mintPrice", async function () {
-      const { ed3Coupon, pointsPerTicket } = await loadFixture(deployFixture);
-      expect(await ed3Coupon.mintPrice()).to.equal(pointsPerTicket);
+    it("Should Check correct attribute", async function () {
+      // loadFixture will run the setup the first time, and quickly return to that state in the other tests.
+      const { ed3AirTicketNFT, ed3AirlineGate, ed3LoyaltyPoints, pointsPerTicket } = await loadFixture(deployFixture);
+      // 校验积分地址
+      expect(await ed3AirlineGate.ed3LoyaltyPointsAddress()).to.equal(ed3LoyaltyPoints.address);
+      // 校验机票地址
+      expect(await ed3AirlineGate.ed3TicketNFTAddress()).to.equal(ed3AirTicketNFT.address);
+      // 校验积分兑换优惠券比例
+      console.log(await ed3AirlineGate.POINTS_PER_TICKET());
     });
   });
 
@@ -97,7 +98,7 @@ describe("Ed3Coupon mint test", function () {
       it("Should mint the NFT to mint account", async function () {
         const { ticketMintPrice, ed3AirTicketNFT, ed3AirlineGate, ed3LoyaltyPoints, ed3Coupon, owner } =
           await loadFixture(deployFixture);
-        // 用户携带ticketMintPrice资金通过服务窗口购买机票
+        // console.log(await myToken.connect(owner).estimateGas.mint(owner.address,{ value: ticketMintPrice }));
         await ed3AirlineGate.connect(owner).mint(owner.address, { value: ticketMintPrice });
         const ed3AirlineTicketBalance = await ed3AirTicketNFT.balanceOf(owner.address);
         const ed3LoyaltyPointsBalance = await ed3LoyaltyPoints.balanceOf(owner.address);

@@ -31,7 +31,7 @@ contract Ed3AirlineGate {
         require(msg.value >= mintPrice, "Insufficient funds");
         uint256 maxSupply = IEd3AirTicketNFT(ed3TicketNFTAddress).maxSupply();
         uint256 totalSupply = IEd3AirTicketNFT(ed3TicketNFTAddress).totalSupply();
-        require(maxSupply > totalSupply, "air ticket sold out");
+        require(maxSupply > totalSupply, "tickets sold out");
         // 购买机票NFT
         IEd3AirTicketNFT(ed3TicketNFTAddress).mint{ value: msg.value }(_to);
         // 每次购买机票后可以得到 POINTS_PER_TICKET 积分
