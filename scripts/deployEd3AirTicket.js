@@ -12,7 +12,7 @@ async function main() {
   const mintPrice = 10 ** 14;
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account: " + deployer.address);
-  const metadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/feature/make_up_omissions/nfts/metadata_fix/coupon.json`;
+  const metadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/ticket.json`;
   const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
   const launchDate = moment("2023-03-12 00:00");
   const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
