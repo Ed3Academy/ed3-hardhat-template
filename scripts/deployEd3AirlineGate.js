@@ -58,7 +58,7 @@ async function main() {
     `npx hardhat verify --network PolygonMumbai "${ed3AirlineGate.address}" ${ed3LoyaltyPoints.address} ${ed3AirTicketNFT.address} ${pointsPerTicket}`,
   );
 
-  // 部署优惠券 Coupon
+  // 部署优惠券 Ed3Coupon
   const couponName = "Ed3Coupon";
   const couponSymbol = "Ed3Coupon";
   const couponMetadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/coupon.json`;
