@@ -15,14 +15,14 @@ describe("Ed3AirTicketNFT test", function () {
     const ticketNFTSymbol = "Ed3AirTicket";
     const ticketMintPrice = 10 ** 14;
     const [owner] = await ethers.getSigners();
-    const ticketMetadata = ticketNFTLocation.metadata;
+    const ticketMetadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/ticket.json`;
     const maxSupply = 2;
     const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
     const ticketLaunchDate = moment("2023-03-12 00:00");
     const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
       ticketNFTName,
       ticketNFTSymbol,
-      `ipfs://${ticketMetadata}/`,
+      ticketMetadata,
       ticketMintPrice,
       maxSupply,
       Math.round(ticketLaunchDate.valueOf() / 1000),
