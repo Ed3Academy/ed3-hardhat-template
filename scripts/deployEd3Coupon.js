@@ -20,7 +20,7 @@ async function main() {
   // 部署优惠券 Coupon
   const couponName = "Ed3Coupon";
   const couponSymbol = "Ed3Coupon";
-  const couponMetadata = couponNFTLocation.metadata;
+  const couponMetadata = `https://raw.githubusercontent.com/Ed3Academy/ed3-hardhat-template/main/nfts/metadata_fix/coupon.json`;
   const couponMintPrice = 1000;
   const couponCount = 1000;
   const Ed3Coupon = await ethers.getContractFactory("Ed3Coupon");
