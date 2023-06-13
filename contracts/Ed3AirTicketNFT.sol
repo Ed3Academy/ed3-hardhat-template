@@ -119,8 +119,9 @@ contract Ed3AirTicketNFT is Ownable, ERC721, ERC721Enumerable, ERC721URIStorage,
         super._burn(tokenId);
     }
 
-    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        return bytes(_baseURI()).length > 0 ? string(abi.encodePacked(_baseURI(), tokenId.toString(), ".json")) : "";
+    function tokenURI() public view override(ERC721, ERC721URIStorage) returns (string memory) {
+        return _baseURI();
+        // return bytes(_baseURI()).length > 0 ? string(abi.encodePacked(_baseURI(), tokenId.toString(), ".json")) : "";
     }
 
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
