@@ -29,4 +29,4 @@ yarn-error.log*
 .idea/modules.xml
 .idea/vcs.xml
 .idea/inspectionProfiles/Project_Default.xml
-typechain-types/*
+typechain-types/*.ts
