@@ -1,6 +1,6 @@
 # ✏️Ed3Academy 之 Solidity 入门开发课程案例--Ed3 Miles&More 计划 👷
 
-# **🚧 课题目标**
+## **🚧 课题目标**
 
 客户忠诚度计划是一种营销策略，旨在通过激励和奖励现有客户来提高他们的忠诚度和购买频率。这些计划通常基于一种积分或奖励系统
 ，客户可以通过购买产品或服务来获得积分或奖励，并在未来兑换这些积分或奖励以获取折扣、礼品或其他特殊待遇。通过这种方式，客
@@ -59,28 +59,23 @@ Web3 技术可以促进不同平台之间的互操作性，让客户可以在不
 在客户忠诚度计划中，这意味着参与者可以清楚地查看他们的代币、积分或其他权益的来源和流动情况，确保这些权益的发放和使用是公
 平和透明的。
 
-# **✨ 实践案例**
+## **✨ 实践案例**
 
 Lufthansa Miles & More 是德国汉莎航空旗下的忠诚度计划，旨在为经常乘坐汉莎航空及其合作伙伴航空公司的旅客提供奖励和特权
 。Miles & More 发行了代币，称为 Lufthansa 代币，可以在 Miles & More 计划内兑换奖励。持有 Lufthansa 代币的会员可以使用它
 们来兑换机票、升舱、酒店住宿、租车等，还可以在 Miles & More 商城中购买商品。
 
-本次课题实践是做一版简化的 Lufthansa Token，主要涉及到的流程：
-
-1. 用户使用原生币购买机票，可以看到机票数+1，同时获取 1 个 Lufthansa Token。
-2. 用户可以使用 10 个积分兑换 1 张机票（数字权益 NFT）。
-
-# 🎉 实践过程
+本次课题实践是做一版简化的 Ed3 Miles & More，案例流程：
 
 ![1677049582677](image/README/simple_view.png)
 
-案例流程：
+1. 用户 User 通过 Ed3AirlineGate 服务窗口购买机票 Ed3AirTicketNFT；
+2. Ed3AirlineGate 服务窗口将机票 Ed3AirTicketNFT 和积分 Ed3LoyaltyPoints 发放给 User；
+3. User 使用 Ed3LoyaltyPoints 积分兑换 Ed3Coupon 优惠券；
 
-1. 用户 User 通过 Ed3AirlineGate 服务窗口购买机票；
-2. Ed3AirlineGate 服务窗口将机票和积分发放给 User；
-3. User 使用积分兑换 Coupon 优惠券；
+## 🎉 实践过程
 
-其中第一步中，V0 版本用一个 mapping 记录用户的机票数；正式版本用户将实际购买机票 NFT（ERC721）。
+其中，V0 版本用一个 mapping 记录用户的机票数；正式版本用户将实际购买机票 NFT（ERC721）
 
 您需要复制.env.example 并改名为.env，填充.env 中账号信息，然后安装项目依赖
 
@@ -88,7 +83,7 @@ Lufthansa Miles & More 是德国汉莎航空旗下的忠诚度计划，旨在为
 npm install
 ```
 
-## V0 版本
+### V0 版本
 
 测试命令
 
@@ -102,7 +97,7 @@ npx hardhat test ./test/testDeployLoyaltyProgramV0.js
 npx hardhat run ./scripts/deployLoyaltyProgramV0.js --network PolygonMumbai
 ```
 
-## 正式版本
+### 正式版本
 
 测试命令
 

@@ -19,8 +19,11 @@ describe("Ed3AirlineGate test", function () {
     const [deployer] = await ethers.getSigners();
     const ticketMetadata = ticketNFTLocation.metadata;
     const ticketCount = ticketNFTLocation.count;
+    // 获取合约对象
     const Ed3AirTicketNFT = await ethers.getContractFactory("Ed3AirTicketNFT");
+    // 设置ERC721开始发售时间
     const ticketLaunchDate = moment("2023-03-12 00:00");
+    // 部署合约
     const ed3AirTicketNFT = await Ed3AirTicketNFT.deploy(
       ticketNFTName,
       ticketNFTSymbol,
@@ -102,10 +105,13 @@ describe("Ed3AirlineGate test", function () {
         console.log("ed3AirlineGate ticket balance:", ed3AirlineTicketBalance);
         console.log("ed3LoyaltyPoints balance:", ed3LoyaltyPointsBalance);
         console.log("ed3LoyaltyPoints approve address:", ed3Coupon.address);
+        // 授权积分合约给优惠券合约，如此做才能让优惠券合约收走对应的积分完成兑换
         await ed3LoyaltyPoints.connect(owner).approve(ed3Coupon.address, 0);
         await ed3LoyaltyPoints.connect(owner).approve(ed3Coupon.address, ed3LoyaltyPointsBalance);
         console.log("ed3Coupon balance before:", await ed3Coupon.balanceOf(owner.address));
+        // 完成积分的兑换
         await ed3Coupon.connect(owner).mint(owner.address);
+        // 校验优惠券的数量为1
         expect(await ed3Coupon.balanceOf(owner.address)).to.equal(1);
         console.log("ed3Coupon token balance after:", await ed3Coupon.balanceOf(owner.address));
       });

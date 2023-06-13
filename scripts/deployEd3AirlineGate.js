@@ -60,7 +60,7 @@ async function main() {
   const couponSymbol = "Ed3Coupon";
   const couponMetadata = couponNFTLocation.metadata;
   const couponMintPrice = 1000;
-  const couponCount = 1000;
+  const couponCount = 100000;
   const Ed3Coupon = await ethers.getContractFactory("Ed3Coupon");
   const couponLaunchDate = moment("2023-03-12 00:00");
   const ed3Coupon = await Ed3Coupon.deploy(

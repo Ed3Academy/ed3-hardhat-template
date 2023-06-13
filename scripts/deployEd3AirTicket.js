@@ -2,7 +2,7 @@
 const hre = require("hardhat");
 const { ethers } = require("hardhat");
 const moment = require("moment");
-// 在这里修改元数据地址
+// 在这里获取元数据地址
 const NFTLocation = require("../nfts/location/ticket/location.json");
 // 部署机票
 async function main() {
