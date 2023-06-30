@@ -19,7 +19,7 @@ contract Ed3LoyaltyPoints {
     // 构造函数中指明了积分名称name、积分符号symbol以及积分发行上限
     // 请在此处编写代码
     /********** Begin **********/
-    // 请在构造函数中指定积分发行上限cap
+    // 请在构造函数中定义一个变量，用于指定积分发行上限cap
     constructor(string memory name, string memory symbol) ERC20(name, symbol) {}
 
     /********** End **********/
