@@ -14,19 +14,24 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * Ownable 是一个基础合约，它提供了一个拥有者（owner）的概念，允许合约的拥有者执行一些关键操作，例如更改合约状态、转移合约所有权等。
  */
 contract Ed3LoyaltyPoints is ERC20, ERC20Capped, ERC20Burnable, Ownable {
-    // Ed3积分合约构造函数，在部署脚本中传入name、symbol和发行上限
+    // 构造函数中指明了积分名称name、积分符号symbol以及积分发行上限
     constructor(string memory name, string memory symbol, uint256 cap) ERC20(name, symbol) ERC20Capped(cap) {}
 
+    // mint函数是铸造代币的函数，接收2个参数。
+    // 1. 积分的发放对象
+    // 2. 积分发放数量
+    // mint函数仅限内部函数调用。
+    // 同时积分的铸造需要控制调用权限，这里使用修饰器进行限制。
     function mint(address _to, uint256 _mintTokenNumber) external onlyOwner {
         _mint(_to, _mintTokenNumber);
     }
 
-    // 重写父类的_mint方法，指明使用的mint方法是 ERC20Capped提供的
+    // 重写父类的_mint方法，指明使用的mint方法是ERC20Capped提供的
     function _mint(address account, uint256 amount) internal virtual override(ERC20, ERC20Capped) {
         ERC20Capped._mint(account, amount);
     }
 
-    // 设定代币精度为1
+    // 为了让积分便于理解，这里设定代币精度为1
     function decimals() public view virtual override returns (uint8) {
         return 1;
     }
